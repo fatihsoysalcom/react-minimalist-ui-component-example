@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Minimalist UI Example</title>
+    <!-- React ve ReactDOM kütüphanelerini CDN üzerinden yüklüyoruz. -->
+    <!-- Bu, React'in sadece bir kütüphane olduğunu ve kolayca dahil edilebildiğini gösterir. -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel'i CDN üzerinden yüklüyoruz. JSX'i tarayıcıda dönüştürmek için. -->
+    <!-- Normalde bir build adımı olurdu, ancak burada minimalist yaklaşımı göstermek için doğrudan kullanıyoruz. -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button.increment {
+            background-color: #4CAF50;
+            color: white;
+        }
+        button.increment:hover {
+            background-color: #45a049;
+        }
+        button.decrement {
+            background-color: #f44336;
+            color: white;
+        }
+        button.decrement:hover {
+            background-color: #da190b;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // React'in sadece UI oluşturmaya odaklandığını gösteren basit bir sayaç bileşeni.
+        // State yönetimi ve DOM güncellemeleri React tarafından halledilir.
+        function Counter() {
+            const [count, setCount] = React.useState(0);
+
+            // Artırma fonksiyonu
+            const increment = () => {
+                setCount(prevCount => prevCount + 1);
+            };
+
+            // Azaltma fonksiyonu
+            const decrement = () => {
+                setCount(prevCount => prevCount - 1);
+            };
+
+            return (
+                <div className="container">
+                    <h1>Basit React Sayaç</h1>
+                    <p>Mevcut Sayı: {count}</p>
+                    <button className="decrement" onClick={decrement}>Azalt</button>
+                    <button className="increment" onClick={increment}>Artır</button>
+                    <p style={{marginTop: '30px', fontSize: '0.9em', color: '#666'}}>
+                        Bu örnek, React'in sadece kullanıcı arayüzü oluşturma aracı olduğunu gösterir.
+                        Yönlendirme, veri yönetimi gibi diğer ihtiyaçlar için ek kütüphaneler seçmek size kalmıştır.
+                    </p>
+                </div>
+            );
+        }
+
+        // React uygulamasını 'root' ID'li DOM elementine bağlıyoruz.
+        // ReactDOM.createRoot().render() modern React 18+ yaklaşımıdır.
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Counter />);
+    </script>
+</body>
+</html>
